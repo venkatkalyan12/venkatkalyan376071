@@ -1,0 +1,39 @@
+Class user {
+First_Name
+Last_Name
+Date_Of_Birth
+Phone_Number
+Communication_Address
+}
+           User id
+          Password
+
+Class Payments Account {
+         Payments_Accounts_id
+         Current_wallet_Balance
+         }
+
+Class Bank Account {
+         Bank_Account_BankName
+         Bank_Account_HolderName
+         Bank_Account_Number
+         Bank_Account_IFS Code
+         Bank_Account_Type
+         Bank_Account_PinNumber
+         }
+Class Transaction {
+Transaction ID
+Transaction_Date&Time
+Transaction_Status
+Transaction_Source(userID,BA)
+Transaction_Destination
+Transaction_ReferrenceNumber
+}
+
+Enum Transaction Status {
+Success
+Fail
+Refund
+In_Process
+}
+
