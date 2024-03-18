@@ -92,8 +92,9 @@ public class RunPaymentsAPP {
 				         }else if(optStr.equalsIgnoreCase("2")) { 
 				        	   login();
 				         }else if(optStr.equalsIgnoreCase("-1")) {
+							 logout();
 								System.out.println("No user logged in");
-								break;
+								
 						 }else if(optStr.equalsIgnoreCase("3")) {
 							 userId = login();
 							addBankAccount();
@@ -120,7 +121,7 @@ public class RunPaymentsAPP {
 							 System.out.println("Updated bank account balance: " + BankAccount.getBalance());
 						}else if(optStr.equalsIgnoreCase("12")) {
 						}else if(optStr.equalsIgnoreCase("13")) {
-						
+						break;
 					
 						}else {
 							
