@@ -21,13 +21,13 @@ public class UserOperations {
 	 List<User>list = RunPaymentsAPP.usersList;
 	 Map<Integer,wallet> walletList = RunPaymentsAPP.walletList;
 	 List<BankAccount> baList = RunPaymentsAPP.bankAcctList;
-public User doUserRegistration(String fName, String lName, String password, long phNum,String gmail, String dob,String addr) {
+public User doUserRegistration(String fName, String lName, String password, long phNum, String dob,String addr) {
 
 	User u = new User();
 	u.setFirstName(fName);
 	u.setLastName(lName);
 	u.setPhoneNum(phNum);
-	u.setGmail(gmail);
+//	u.setGmail(gmail);
 	u.setDateOfBirth(dob);
 	u.setCommunicationAddr(addr);
 	u.setPassword(password);

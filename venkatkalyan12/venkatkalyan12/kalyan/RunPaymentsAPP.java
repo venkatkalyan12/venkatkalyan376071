@@ -91,10 +91,7 @@ public class RunPaymentsAPP {
 						
 				         }else if(optStr.equalsIgnoreCase("2")) { 
 				        	   login();
-				         }else if(optStr.equalsIgnoreCase("-1")) {
-							 logout();
-								System.out.println("No user logged in");
-								
+				      
 						 }else if(optStr.equalsIgnoreCase("3")) {
 							 userId = login();
 							addBankAccount();
@@ -121,7 +118,10 @@ public class RunPaymentsAPP {
 							 System.out.println("Updated bank account balance: " + BankAccount.getBalance());
 						}else if(optStr.equalsIgnoreCase("12")) {
 						}else if(optStr.equalsIgnoreCase("13")) {
-						break;
+							logout();
+					    }else if(optStr.equalsIgnoreCase("-1")) {
+								
+								break;
 					
 						}else {
 							
@@ -142,8 +142,8 @@ public static int register() {
 	String lName = opt1.next();
 	System.out.println("Phone Number:");
 	long phNo = Long.parseLong(opt1.next());
-	System.out.println("gmail:");
-	String gmail = opt1.next();
+//	System.out.println("gmail:");
+//	String gmail = opt1.next();
 	System.out.println("Date Of Birth:");
 	String dob = opt1.next();
 	System.out.println("Address:");
@@ -151,13 +151,17 @@ public static int register() {
 	System.out.println("Password:");
 	String password = opt1.next();
 	       UserOperations ops = new UserOperations();
-	User u = ops.doUserRegistration(fName, lName, password,phNo, gmail, dob, addr);
+	User u = ops.doUserRegistration(fName, lName, password,phNo, dob, addr);
 	int userId = u.getUserId();
 	
 	try {
 		SQLCONNECTION SqlCon = new SQLCONNECTION();
 		SQLCONNECTION.UserTODB(u);
-	}catch(Exception e){
+		
+	}catch(ClassNotFoundException e) {
+		e.printStackTrace();
+	
+	}catch(SQLException e){
 		e.printStackTrace();
 	}
 	
@@ -184,8 +188,8 @@ public static int register() {
 			 UserOperations ops = new UserOperations();
 			 ops.userLogIn(userid,password);
 			 currUserId = userid;
-		}
-		else {
+
+        } else {
 			System.out.println("if you want to login into another account logout from current account");
 		}
 		return currUserId;
@@ -241,7 +245,10 @@ public static int register() {
 			SQLCONNECTION SqlCon = new SQLCONNECTION();
 			SqlCon.addAccountToDB(ba);
 		
-		}catch(Exception e){
+	    } catch(ClassNotFoundException e) {
+	    	e.printStackTrace();
+	    
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 	    
@@ -286,7 +293,7 @@ private static void addMoney() {
 			System.out.println("user must log in to add money to wallet");
 		}
 	}
-private static void logout() {
+public static void logout() {
 	currentUserId = -1;
 }
 
