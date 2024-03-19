@@ -27,9 +27,9 @@ public class SQLCONNECTION {
 		Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/paymentsapplication", "root", "9490");
 	   	Statement Stm = Con.createStatement();
 		 String Query = "insert into bankAccount_Details(User_id, Bank_Acc_Num,Bank_Name,IFSC_Code,Acc_Type,Acc_Balance,BankAccount_pin)"+
-	   	"VALUES('"+b.getUserid()+"','"+b.getAcctNumber()+"','"+b.getBankName()+"','"+b.getIFSC()+"','"+b.getAcctType()+"','"+b.getAcctBalance()+"','"+b.getAcctPin()+"')";
+	   	"VALUES('"+b.getUserid()+"','"+b.getAcctNumber()+"','"+b.getBankName()+"','"+b.getIFSC()+"','"+b.getAcctType()+"','"+b.getBalance()+"','"+b.getAcctPin()+"')";
 		 Stm.executeUpdate(Query);
-		 String updateBalanceQuery = "(UPDATE bankAccount_Details SET Acc_Balance = '" + b.getAcctBalance() +
+		 String updateBalanceQuery = "(UPDATE bankAccount_Details SET Acc_Balance = '" + b.getBalance() +
                  "' WHERE Bank_Acc_Num = '" + b.getAcctNumber() + "')";
          Stm.executeUpdate(updateBalanceQuery);
 		 Con.close(); 
