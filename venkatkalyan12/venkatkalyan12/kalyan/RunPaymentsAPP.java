@@ -188,6 +188,17 @@ public static int register() {
 			 UserOperations ops = new UserOperations();
 			 ops.userLogIn(userid,password);
 			 currUserId = userid;
+			 
+			 try {
+					SQLCONNECTION SqlCon = new SQLCONNECTION();
+					SQLCONNECTION.verifyLoginDetails(userid,password);
+					
+				}catch(ClassNotFoundException e) {
+					e.printStackTrace();
+				
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
 
         } else {
 			System.out.println("if you want to login into another account logout from current account");

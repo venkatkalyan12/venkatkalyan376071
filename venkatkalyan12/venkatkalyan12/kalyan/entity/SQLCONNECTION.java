@@ -26,22 +26,29 @@ public class SQLCONNECTION {
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/paymentsapplication", "root", "9490");
 	   	Statement Stm = Con.createStatement();
-		 String Query = "insert into bankAccount_Details(User_id, Bank_Acc_Num,Bank_Name,IFSC_Code,Acc_Type,Acc_Balance,)"+
-	   	"values('"+b.getUserid()+"','"+b.getAcctNumber()+"','"+b.getBankName()+"','"+b.getIFSC()+"','"+b.getAcctType()+"','"+b.getAcctBalance()+"')";
+		 String Query = "insert into bankAccount_Details(User_id, Bank_Acc_Num,Bank_Name,IFSC_Code,Acc_Type,Acc_Balance,BankAccount_pin)"+
+	   	"VALUES('"+b.getUserid()+"','"+b.getAcctNumber()+"','"+b.getBankName()+"','"+b.getIFSC()+"','"+b.getAcctType()+"','"+b.getAcctBalance()+"','"+b.getAcctPin()+"')";
 		 Stm.executeUpdate(Query);
+		 String updateBalanceQuery = "(UPDATE bankAccount_Details SET Acc_Balance = '" + b.getAcctBalance() +
+                 "' WHERE Bank_Acc_Num = '" + b.getAcctNumber() + "')";
+         Stm.executeUpdate(updateBalanceQuery);
 		 Con.close(); 
 		 Stm.close();
 	 }
 	
 
-	    private static boolean verifyLoginDetails(int userId, String password) throws ClassNotFoundException, SQLException {
+	    public static boolean verifyLoginDetails(int userid, String password) throws ClassNotFoundException, SQLException {
 	    	 Class.forName("com.mysql.cj.jdbc.Driver");
 	        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/paymentsapplication", "root", "9490");
 	             PreparedStatement ps = con.prepareStatement("SELECT User_id FROM User_Details WHERE User_id ='\"+u.getUserId()+\"' AND PassWord = '\"+u.getPassword()+\"'");
-	            ps.setInt(1, userId);
+	            ps.setInt(1, userid);
 	            ps.setString(2, password);
 	            ResultSet rs = ps.executeQuery();
-	            return rs.next();
+	            boolean isValidUser = rs.next();
+	            rs.close();
+	            ps.close();
+	            con.close();
+	            return isValidUser;
 	    }
 
 }
